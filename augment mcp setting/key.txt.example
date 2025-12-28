@@ -1,6 +1,0 @@
-# Copy this file to `key.txt` (this repo ignores key.txt via .gitignore).
-# Never commit real secrets to a public repository.
-
-AUGMENT_API_TOKEN=<RELAY_KEY_OR_ACCESS_TOKEN>
-AUGMENT_API_URL=<RELAY_BASE_URL_OR_TENANT_URL_ENDS_WITH_SLASH>
-
