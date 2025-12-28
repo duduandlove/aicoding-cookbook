@@ -4,19 +4,47 @@
 
 ## 主要内容
 
-- `augment mcp setting/`
-  - `augment-mcp-configuration-guide.md`：Augment Context Engine MCP（Codex / Claude Code）配置与验证指南（含 `prompt-enhancer` 不出现时的 `augment.mjs` 替换修复步骤，覆盖 Windows / Linux / macOS）。
-  - `augment.mjs`：用于排障时替换本机 `@augmentcode/auggie` 的同名文件，确保 MCP 工具（包含 `prompt-enhancer`）可正常暴露。
-  - `key.txt.example`：本机密钥文件模板（`key.txt` 会被 `.gitignore` 忽略）。
-- `skills/`：一些可复用的 Codex/Agent 技能与脚本（例如 TODO CSV 跟踪、skill 打包等）。
+### augment-mcp-config/
 
-## 快速开始（以 Augment MCP 为例）
+Augment Context Engine MCP 一键配置工具包，专为 Claude Code AI 自动化配置设计。
 
-1) 进入 `augment mcp setting/`，复制 `key.txt.example` 为 `key.txt` 并填入你的 token/url（不要提交）。
-2) 按 `augment mcp setting/augment-mcp-configuration-guide.md` 配置 MCP 并验证工具可用性。
-3) 若 `prompt-enhancer` 不出现，按指南替换本机 `@augmentcode/auggie/augment.mjs` 后重启 MCP。
+| 文件 | 说明 |
+|------|------|
+| `Augment-MCP配置教程.md` | AI 执行指令文档，覆盖 Augment MCP + Codex MCP 配置（Windows / macOS / Linux） |
+| `augment.mjs` | J3n5en 修改版，包含 `codebase-retrieval` + `prompt-enhancer` 工具 |
+
+**使用方式**：将 `augment-mcp-config/` 文件夹拖拽给 Claude Code，告诉它你的 token，AI 会自动完成全部配置。
+
+### skills/
+
+可复用的 Codex/Agent 技能与脚本集合。
+
+| 技能 | 说明 |
+|------|------|
+| `codex/skill-creator` | Skill 打包与初始化工具 |
+| `codex/todo-list-csv` | TODO CSV 跟踪脚本 |
+
+## 快速开始
+
+### Augment MCP 配置
+
+1. 将 `augment-mcp-config/` 文件夹拖拽到 Claude Code
+2. 输入：`帮我配置 Augment MCP，token 是 ace_xxxxxx`
+3. 等待 AI 自动完成配置和测试
+
+### 使用 Codex Skills
+
+1. 进入 `skills/codex/` 目录
+2. 阅读对应 skill 的 `SKILL.md` 了解用法
+3. 按说明在 Codex 中调用
 
 ## 安全提示
 
-- 不要把任何真实 token/key 写进仓库、issue、截图或聊天记录。
-- 本仓库默认忽略 `augment mcp setting/key.txt`；只提交 `key.txt.example` 模板。
+- 不要把任何真实 token/key 写进仓库、issue、截图或聊天记录
+- 本仓库 `.gitignore` 已忽略常见敏感文件
+
+## 致谢
+
+- [J3n5en](https://github.com/J3n5en) - augment.mjs 修改版作者
+- [Augment ACE MCP](https://acemcp.heroman.wtf/)
+- [OpenAI Codex CLI](https://developers.openai.com/codex/cli)
