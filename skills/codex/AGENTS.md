@@ -1,27 +1,74 @@
 # Global Agent Rules
 
-You have personal skills stored in `~/.codex/skills/`.
-Before starting a task, scan available skills.
-If a skill matches, read its `SKILL.md` and follow it.
-Announce which skill you are using.
+## Language
 
-## Official Documentation (Context7 + Web Search)
-Whenever the task requires consulting official documentation, always retrieve it via the Context7 MCP and also do a web search to cross-check recency and fill any gaps:
+Default to Chinese in user-facing replies unless the user explicitly requests another language.
 
-## 默认使用中文与我沟通；除非我明确要求英文/其他语言。
+## Response Style
 
-1) Call `mcp__context7__resolve-library-id` to get the Context7-compatible library ID
-2) Call `mcp__context7__get-library-docs` (use `topic` to focus the lookup)
-3) Use web search (e.g., `web.run`) to confirm time-sensitive details (versions, deprecations, migration guides) and to find any missing official pages
-4) If Context7 cannot resolve/find the docs, use web search to identify the correct official docs and then retry Context7 (or ask the user for an explicit Context7 library ID); if Context7 still has no coverage, proceed with the official web docs and note the limitation
+Do not propose follow-up tasks or enhancement at the end of your final answer.
 
+## Debug-First Policy (No Silent Fallbacks)
 
-## TODO CSV Tracking for Project Changes
+- Do **not** introduce new boundary rules / guardrails / blockers / caps (e.g. max-turns), fallback behaviors, or silent degradation **just to make it run**.
+- Do **not** add mock/simulation fake success paths (e.g. returning `(mock) ok`, templated outputs that bypass real execution, or swallowing errors).
+- Do **not** write defensive or fallback code; it does not solve the root problem and only increases debugging cost.
+- Prefer **full exposure**: let failures surface clearly (explicit errors, exceptions, logs, failing tests) so bugs are visible and can be fixed at the root cause.
+- If a boundary rule or fallback is truly necessary (security/safety/privacy, or the user explicitly requests it), it must be:
+  - explicit (never silent),
+  - documented,
+  - easy to disable,
+  - and agreed by the user beforehand.
 
-When a task involves actual changes to the project (add/modify/delete files) and has multiple steps:
+## Engineering Quality Baseline
 
-1) Call `update_plan` to create a plan (keep exactly 1 `in_progress`)
-2) Create `"{Task Name} TO DO list.csv"` in the project root (`status` uses `TODO/IN_PROGRESS/DONE`, mapped 1:1 to plan `pending/in_progress/completed`)
-3) On each progress update, sync both the CSV and plan; once all items are `DONE`, delete the CSV and mark all plan steps as `completed`
+- Follow SOLID, DRY, separation of concerns, and YAGNI.
+- Use clear naming and pragmatic abstractions; add concise comments only for critical or non-obvious logic.
+- Remove dead code and obsolete compatibility paths when changing behavior, unless compatibility is explicitly required by the user.
+- Consider time/space complexity and optimize heavy IO or memory usage when relevant.
+- Handle edge cases explicitly; do not hide failures.
 
-Tip: if the description matches, prefer the `todo-list-csv` skill (at `~/.codex/skills/todo-list-csv/`).
+## Code Metrics (Hard Limits)
+
+- **Function length**: 50 lines (excluding blanks). Exceeded  extract helper immediately.
+- **File size**: 300 lines. Exceeded  split by responsibility.
+- **Nesting depth**: 3 levels. Use early returns / guard clauses to flatten.
+- **Parameters**: 3 positional. More  use a config/options object.
+- **Cyclomatic complexity**: 10 per function. More  decompose branching logic.
+- **No magic numbers**: extract to named constants (`MAX_RETRIES = 3`, not bare `3`).
+
+## Decoupling & Immutability
+
+- **Dependency injection**: business logic never `new`s or hard-imports concrete implementations; inject via parameters or interfaces.
+- **Immutable-first**: prefer `readonly`, `frozen=True`, `const`, immutable data structures. Never mutate function parameters or global state; return new values.
+
+## Security Baseline
+
+- Never hardcode secrets, API keys, or credentials in source code; use environment variables or secret managers.
+- Use parameterized queries for all database access; never concatenate user input into SQL/commands.
+- Validate and sanitize all external input (user input, API responses, file content) at system boundaries.
+- **Conversation keys  code leaks**: When the user shares an API key in conversation (e.g. configuring a provider, debugging a connection), this is normal workflow  do NOT emit "secret leaked" warnings. Only alert when a key is written into a source code file. Frontend display is already masked; no need to remind repeatedly.
+
+## Testing and Validation
+
+- Keep code testable and verify with automated checks whenever feasible.
+- When running backend unit tests, enforce a hard timeout of 60 seconds to avoid stuck tasks.
+- Prefer static checks, formatting, and reproducible verification over ad-hoc manual confidence.
+
+## Skills
+
+Skills are stored in `~/.codex/skills/` (personal) and optionally `.codex/skills/` (project-shared).
+
+Before starting a task:
+
+- Scan available skills.
+- If a skill matches, read its `SKILL.md` and follow it.
+- Announce which skill(s) are being used.
+
+Routing table:
+
+| Scenario | Skill | Trigger |
+|----------|-------|---------|
+| Web research / docs lookup / fact-checking | `researcher` | "search", "research", "搜索", "调研", "查文档", "查一下", "帮我搜", Context7 + web search |
+| Code exploration / architecture | `explore` | "where / how / call chain / data flow" |
+| Multi-step task tracking (LITE: 3-8 steps) | `taskmaster` | Quick multi-step tasks with CSV tracking |
