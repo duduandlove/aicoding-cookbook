@@ -69,6 +69,3 @@ Routing table:
 
 | Scenario | Skill | Trigger |
 |----------|-------|---------|
-| Web research / docs lookup / fact-checking | `researcher` | "search", "research", "搜索", "调研", "查文档", "查一下", "帮我搜", Context7 + web search |
-| Code exploration / architecture | `explore` | "where / how / call chain / data flow" |
-| Multi-step task tracking (LITE: 3-8 steps) | `taskmaster` | Quick multi-step tasks with CSV tracking |
