@@ -69,3 +69,4 @@ Routing table:
 
 | Scenario | Skill | Trigger |
 |----------|-------|---------|
+| Long-horizon autonomous tasks (FULL: 5-15 steps) | `taskmaster` | "long task", "big project", "autonomous", "从零开始", "长时任务", 1+ hour sessions |
