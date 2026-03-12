@@ -1,50 +1,109 @@
 # aicoding-cookbook
 
-这个仓库是一个「AI Coding 配置/排障小抄」集合，主要记录我在本机/团队环境里把工具链跑通的最小步骤、常见坑位和可复用文件。
+`aicoding-cookbook` is a practical repository of setup assets, reusable skills, and helper scripts for AI coding workflows. It is organized around real operational needs: configuring Augment MCP, reusing Codex skills, and standardizing task tracking or skill authoring routines.
 
-## 主要内容
+This repository is not an application, SDK, or framework. It is a working cookbook for configuring tools and reusing workflow components in day-to-day AI-assisted development.
 
-### augment-mcp-config/
+## Who This Repository Is For
 
-Augment Context Engine MCP 一键配置工具包，专为 Claude Code AI 自动化配置设计。
+- Developers who use AI coding tools such as Claude Code, Codex CLI, and Augment Context Engine.
+- Operators who want ready-to-reuse configuration assets instead of rebuilding local setup steps from scratch.
+- Teams or individuals who maintain repeatable Codex skills and task-tracking workflows.
 
-| 文件 | 说明 |
-|------|------|
-| `Augment-MCP配置教程.md` | AI 执行指令文档，覆盖 Augment MCP + Codex MCP 配置（Windows / macOS / Linux） |
-| `augment.mjs` | J3n5en 修改版，包含 `codebase-retrieval` + `prompt-enhancer` 工具 |
+## What Is Inside
 
-**使用方式**：将 `augment-mcp-config/` 文件夹拖拽给 Claude Code，告诉它你的 token，AI 会自动完成全部配置。
+### 1. Augment MCP configuration kit
 
-### skills/
+The [`augment-mcp-config/`](./augment-mcp-config) directory contains a setup package for Augment Context Engine MCP:
 
-可复用的 Codex/Agent 技能与脚本集合。
+- [`Augment-MCP配置教程.md`](./augment-mcp-config/Augment-MCP配置教程.md): a Chinese-language setup guide written for AI-assisted execution. It covers Augment MCP and Codex MCP setup across Windows, macOS, and Linux.
+- [`augment.mjs`](./augment-mcp-config/augment.mjs): a bundled patched `augment.mjs` file referenced by the guide. The guide describes it as a modified Auggie entry file with `codebase-retrieval` and `prompt-enhancer` support.
 
-| 技能 | 说明 |
-|------|------|
-| `codex/skill-creator` | Skill 打包与初始化工具 |
-| `codex/todo-list-csv` | TODO CSV 跟踪脚本 |
+This folder is aimed at users who want to hand a self-contained setup package to an AI assistant and let it perform the configuration steps.
 
-## 快速开始
+### 2. Reusable Codex skills
 
-### Augment MCP 配置
+The [`skills/codex/`](./skills/codex) directory currently contains three reusable skill packages:
 
-1. 将 `augment-mcp-config/` 文件夹拖拽到 Claude Code
-2. 输入：`帮我配置 Augment MCP，token 是 ace_xxxxxx`
-3. 等待 AI 自动完成配置和测试
+- [`taskmaster`](./skills/codex/taskmaster): a multi-step task tracking skill with task specs, progress logging, and CSV-backed milestone management.
+- [`todo-list-csv`](./skills/codex/todo-list-csv): a lightweight CSV task tracker that keeps a to-do file synchronized with agent planning.
+- [`skill-creator`](./skills/codex/skill-creator): a guide and helper scripts for creating, validating, and packaging new skills.
 
-### 使用 Codex Skills
+### 3. Helper scripts and templates
 
-1. 进入 `skills/codex/` 目录
-2. 阅读对应 skill 的 `SKILL.md` 了解用法
-3. 按说明在 Codex 中调用
+The skills ship with actual scripts and templates, not just prose documentation:
 
-## 安全提示
+- [`skills/codex/todo-list-csv/scripts/todo_csv.py`](./skills/codex/todo-list-csv/scripts/todo_csv.py): a Python CLI for creating and advancing task CSV files. The script includes commands such as `path`, `init`, `add`, `start`, `done`, `todo`, `advance`, `plan`, `status`, and `cleanup`.
+- [`skills/codex/skill-creator/scripts/init_skill.py`](./skills/codex/skill-creator/scripts/init_skill.py): initializes a new skill directory from a template.
+- [`skills/codex/skill-creator/scripts/package_skill.py`](./skills/codex/skill-creator/scripts/package_skill.py): validates and packages a skill directory into a zip archive.
+- [`skills/codex/skill-creator/scripts/quick_validate.py`](./skills/codex/skill-creator/scripts/quick_validate.py): performs lightweight validation on a skill's `SKILL.md` metadata.
+- [`skills/codex/taskmaster/assets/`](./skills/codex/taskmaster/assets): reusable templates for `SPEC.md`, `PROGRESS.md`, and `TODO.csv`.
 
-- 不要把任何真实 token/key 写进仓库、issue、截图或聊天记录
-- 本仓库 `.gitignore` 已忽略常见敏感文件
+## Repository Layout
 
-## 致谢
+```text
+aicoding-cookbook/
+├── README.md
+├── augment-mcp-config/
+│   ├── Augment-MCP配置教程.md
+│   └── augment.mjs
+└── skills/
+    └── codex/
+        ├── skill-creator/
+        │   ├── LICENSE.txt
+        │   ├── SKILL.md
+        │   └── scripts/
+        ├── taskmaster/
+        │   ├── SKILL.md
+        │   └── assets/
+        └── todo-list-csv/
+            ├── SKILL.md
+            └── scripts/
+```
 
-- [J3n5en](https://github.com/J3n5en) - augment.mjs 修改版作者
+## How To Use This Repository
+
+### Use the Augment MCP package
+
+1. Open [`augment-mcp-config/`](./augment-mcp-config).
+2. Follow the instructions in [`Augment-MCP配置教程.md`](./augment-mcp-config/Augment-MCP配置教程.md).
+3. Replace the installed `augment.mjs` only if your environment matches the assumptions in the guide.
+4. Configure the MCP server in Claude Code or Codex CLI as described in the document.
+
+### Reuse the Codex skills
+
+1. Browse the folders under [`skills/codex/`](./skills/codex).
+2. Read each `SKILL.md` to understand the trigger conditions and workflow.
+3. Reuse the bundled scripts when you want the exact workflow captured in the skill instead of rebuilding it manually.
+
+### Adapt the scripts directly
+
+If you only need the automation pieces, inspect and reuse the bundled Python scripts directly:
+
+- `todo_csv.py` for CSV-backed task progression
+- `init_skill.py` for scaffolding a new skill
+- `package_skill.py` for packaging a skill
+- `quick_validate.py` for lightweight metadata checks
+
+## Requirements and Assumptions
+
+- Node.js and npm are expected for the Augment/Auggie-related setup flow.
+- Python 3 is expected for the helper scripts under `skills/codex/`.
+- The Augment setup guide assumes you are comfortable editing local tool configuration files such as `~/.claude.json` or `~/.codex/config.toml`.
+
+## Language Notes
+
+- This top-level README is written in English for broader GitHub readability.
+- Some bundled documents are still Chinese-language source materials, especially [`augment-mcp-config/Augment-MCP配置教程.md`](./augment-mcp-config/Augment-MCP配置教程.md).
+- The skills themselves are a mix of English and Chinese, depending on how they were originally authored.
+
+## Security Notes
+
+- Do not commit real API tokens, private keys, or machine-specific credentials into this repository.
+- The current [`.gitignore`](./.gitignore) already excludes a local secret path: `augment mcp setting/key.txt`.
+
+## Credits
+
+- [J3n5en](https://github.com/J3n5en) for the modified `augment.mjs` referenced by the bundled guide.
 - [Augment ACE MCP](https://acemcp.heroman.wtf/)
 - [OpenAI Codex CLI](https://developers.openai.com/codex/cli)
