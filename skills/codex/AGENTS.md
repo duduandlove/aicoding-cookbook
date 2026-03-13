@@ -64,9 +64,16 @@ Before starting a task:
 - Scan available skills.
 - If a skill matches, read its `SKILL.md` and follow it.
 - Announce which skill(s) are being used.
+- Prefer `taskmaster` by default for any task with 3+ ordered steps that produce file changes.
 
 Routing table:
 
 | Scenario | Skill | Trigger |
 |----------|-------|---------|
-| Long-horizon autonomous tasks (FULL: 5-15 steps) | `taskmaster` | "long task", "big project", "autonomous", "从零开始", "长时任务", 1+ hour sessions |
+| Multi-step task tracking / autonomous execution | `taskmaster` | 3+ ordered steps that produce file changes, or "track tasks", "make a plan", "track progress", "long task", "big project", "autonomous", "从零开始", "长时任务" |
+
+## Taskmaster Notes
+
+- `taskmaster` v5 supports `Single / Epic / Batch`; shape selection belongs in `SKILL.md`, not in this global file.
+- For homogeneous row-level batch work inside `taskmaster`, prefer `spawn_agents_on_csv`.
+- Keep task-tracking CSV and batch-worker CSV separated.
