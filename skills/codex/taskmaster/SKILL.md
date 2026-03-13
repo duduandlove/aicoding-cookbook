@@ -65,7 +65,7 @@ Use Compact Single when the task is short, linear, and does not need recovery
 logs or cached research artifacts.
 
 - **Files**: project-root `TODO.csv` only
-- **Template**: [compact_todo_template.csv](/Users/luoluo/.codex/skills/taskmaster/assets/compact_todo_template.csv)
+- **Template**: [compact_todo_template.csv](assets/compact_todo_template.csv)
 - **Status set**: `TODO | IN_PROGRESS | DONE`
 - **Best for**: short documentation edits, tiny cleanup passes, quick rename tasks
 
@@ -85,10 +85,10 @@ survive a context reset. This is the default single-task path.
 
 - **Files**: `.codex-tasks/<task-name>/SPEC.md`, `TODO.csv`, `PROGRESS.md`, `raw/`
 - **Templates**:
-  - [SPEC_TEMPLATE.md](/Users/luoluo/.codex/skills/taskmaster/assets/SPEC_TEMPLATE.md)
-  - [PROGRESS_TEMPLATE.md](/Users/luoluo/.codex/skills/taskmaster/assets/PROGRESS_TEMPLATE.md)
-  - [todo_template.csv](/Users/luoluo/.codex/skills/taskmaster/assets/todo_template.csv)
-  - [perf_todo_template.csv](/Users/luoluo/.codex/skills/taskmaster/assets/perf_todo_template.csv)
+  - [SPEC_TEMPLATE.md](assets/SPEC_TEMPLATE.md)
+  - [PROGRESS_TEMPLATE.md](assets/PROGRESS_TEMPLATE.md)
+  - [todo_template.csv](assets/todo_template.csv)
+  - [perf_todo_template.csv](assets/perf_todo_template.csv)
 - **Status set**: `TODO | IN_PROGRESS | DONE | FAILED`
 - **Best for**: code implementation, bug fixes, refactors, multi-hour work
 
@@ -120,8 +120,8 @@ deliverables or dependency chains.
   - `.codex-tasks/<epic-name>/PROGRESS.md`
   - `.codex-tasks/<epic-name>/tasks/<child-task>/...`
 - **Templates**:
-  - [EPIC_TEMPLATE.md](/Users/luoluo/.codex/skills/taskmaster/assets/EPIC_TEMPLATE.md)
-  - [subtasks_template.csv](/Users/luoluo/.codex/skills/taskmaster/assets/subtasks_template.csv)
+  - [EPIC_TEMPLATE.md](assets/EPIC_TEMPLATE.md)
+  - [subtasks_template.csv](assets/subtasks_template.csv)
 - **Status set**: `TODO | IN_PROGRESS | DONE | FAILED`
 - **Best for**: multi-module features, staged refactors, long projects with clear child deliverables
 
@@ -164,9 +164,9 @@ Batch Task is for homogeneous row-level work that should be executed through
   - `.codex-tasks/<task-name>/batch/workers-output.csv`
   - `.codex-tasks/<task-name>/raw/`
 - **Templates**:
-  - [BATCH_TEMPLATE.md](/Users/luoluo/.codex/skills/taskmaster/assets/BATCH_TEMPLATE.md)
-  - [workers_input_template.csv](/Users/luoluo/.codex/skills/taskmaster/assets/workers_input_template.csv)
-  - [workers_output_template.csv](/Users/luoluo/.codex/skills/taskmaster/assets/workers_output_template.csv)
+  - [BATCH_TEMPLATE.md](assets/BATCH_TEMPLATE.md)
+  - [workers_input_template.csv](assets/workers_input_template.csv)
+  - [workers_output_template.csv](assets/workers_output_template.csv)
 - **Best for**: bulk file audits, bulk metadata updates, structured per-row analysis
 
 Batch directory example:
@@ -284,14 +284,14 @@ Every status update must include:
 
 ## References
 
-- [SPEC_TEMPLATE.md](/Users/luoluo/.codex/skills/taskmaster/assets/SPEC_TEMPLATE.md)
-- [PROGRESS_TEMPLATE.md](/Users/luoluo/.codex/skills/taskmaster/assets/PROGRESS_TEMPLATE.md)
-- [todo_template.csv](/Users/luoluo/.codex/skills/taskmaster/assets/todo_template.csv)
-- [perf_todo_template.csv](/Users/luoluo/.codex/skills/taskmaster/assets/perf_todo_template.csv)
-- [compact_todo_template.csv](/Users/luoluo/.codex/skills/taskmaster/assets/compact_todo_template.csv)
-- [EPIC_TEMPLATE.md](/Users/luoluo/.codex/skills/taskmaster/assets/EPIC_TEMPLATE.md)
-- [BATCH_TEMPLATE.md](/Users/luoluo/.codex/skills/taskmaster/assets/BATCH_TEMPLATE.md)
-- [subtasks_template.csv](/Users/luoluo/.codex/skills/taskmaster/assets/subtasks_template.csv)
-- [workers_input_template.csv](/Users/luoluo/.codex/skills/taskmaster/assets/workers_input_template.csv)
-- [workers_output_template.csv](/Users/luoluo/.codex/skills/taskmaster/assets/workers_output_template.csv)
-- [EXAMPLES.md](/Users/luoluo/.codex/skills/taskmaster/assets/EXAMPLES.md)
+- [SPEC_TEMPLATE.md](assets/SPEC_TEMPLATE.md)
+- [PROGRESS_TEMPLATE.md](assets/PROGRESS_TEMPLATE.md)
+- [todo_template.csv](assets/todo_template.csv)
+- [perf_todo_template.csv](assets/perf_todo_template.csv)
+- [compact_todo_template.csv](assets/compact_todo_template.csv)
+- [EPIC_TEMPLATE.md](assets/EPIC_TEMPLATE.md)
+- [BATCH_TEMPLATE.md](assets/BATCH_TEMPLATE.md)
+- [subtasks_template.csv](assets/subtasks_template.csv)
+- [workers_input_template.csv](assets/workers_input_template.csv)
+- [workers_output_template.csv](assets/workers_output_template.csv)
+- [EXAMPLES.md](assets/EXAMPLES.md)
